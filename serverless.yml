@@ -1,0 +1,25 @@
+service: uptime-monitoring
+
+provider:
+  name: aws
+  region: ap-northeast-1
+  runtime: nodejs8.10
+  memorySize: 128
+  timeout: 8
+  stage: ${opt:stage}
+  profile: ${self:custom.config.aws_profile}
+
+custom:
+  config: ${file(./config.yml)}
+
+plugins:
+  - serverless-webpack
+
+functions:
+  main:
+    handler: handler.main
+    environment:
+      targetEndpoint: ${self:custom.config.target_endpoint}
+      slackWebhookUrl: ${self:custom.config.slack_webhook_url}
+    events:
+      - schedule: rate(5 minutes)
