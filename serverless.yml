@@ -2,12 +2,13 @@ service: uptime-monitoring
 
 provider:
   name: aws
-  region: ap-northeast-1
   runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'ap-northeast-1'}
+  profile: ${self:custom.config.aws_profile}
   memorySize: 128
   timeout: 8
-  stage: ${opt:stage}
-  profile: ${self:custom.config.aws_profile}
+  logRetentionInDays: 30
 
 custom:
   config: ${file(./config.yml)}
