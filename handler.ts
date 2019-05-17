@@ -27,15 +27,16 @@ export const main: ScheduledHandler = async (
   let res: httpm.HttpClientResponse;
   try {
     res = await http.get(targetEndpoint);
-    if (res.message.statusCode === 200) {
+    const status = res.message.statusCode;
+    if (status === 200) {
       console.log('target is healthy');
     } else {
-      console.log('target is not healthy');
+      console.log(`target is not healthy: ${status}`);
       const message: string = JSON.stringify({
         attachments: [
           {
             color: 'danger',
-            text: '<!here> health check failed',
+            text: `<!here> health check failed (status: ${status})`,
             title: 'uptime-monitoring',
           },
         ],
