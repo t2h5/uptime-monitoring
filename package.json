@@ -3,7 +3,8 @@
   "main": "handler.js",
   "scripts": {
     "lint": "tslint handler.ts",
-    "deploy": "sls deploy -v"
+    "deploy": "sls deploy -v",
+    "tail-logs": "sls logs -f main -t --startTime 30m"
   },
   "dependencies": {
     "source-map-support": "^0.5.10",
