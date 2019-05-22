@@ -9,6 +9,12 @@ provider:
   memorySize: 128
   timeout: 8
   logRetentionInDays: 30
+  iamRoleStatements:
+    - Effect: Allow
+      Resource:
+        Fn::GetAtt: [DDBTable, Arn]
+      Action:
+        - dynamodb:*
 
 custom:
   config: ${file(./config.yml)}
@@ -24,3 +30,19 @@ functions:
       slackWebhookUrl: ${self:custom.config.slack_webhook_url}
     events:
       - schedule: rate(5 minutes)
+
+resources:
+  Resources:
+    DDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: uptime-monitoring-state-${opt:stage, 'dev'}
+        AttributeDefinitions:
+          - AttributeName: key
+            AttributeType: S
+        KeySchema:
+          - AttributeName: key
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
