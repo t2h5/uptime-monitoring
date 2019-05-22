@@ -28,6 +28,7 @@ functions:
     environment:
       targetEndpoint: ${self:custom.config.target_endpoint}
       slackWebhookUrl: ${self:custom.config.slack_webhook_url}
+      dynamoDBTable: ${self:custom.config.dynamo_db_table}-${opt:stage, 'dev'}
     events:
       - schedule: rate(5 minutes)
 
@@ -36,7 +37,7 @@ resources:
     DDBTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: uptime-monitoring-state-${opt:stage, 'dev'}
+        TableName: ${self:custom.config.dynamo_db_table}-${opt:stage, 'dev'}
         AttributeDefinitions:
           - AttributeName: key
             AttributeType: S

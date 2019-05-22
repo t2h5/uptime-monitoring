@@ -11,10 +11,9 @@ const targetEndpoint = process.env.targetEndpoint;
 const slackWebhookUrl = process.env.slackWebhookUrl;
 
 export const main: ScheduledHandler = async (
-  event: ScheduledEvent,
-  _: Context,
+  _event: ScheduledEvent,
+  _context: Context,
 ) => {
-  console.log(event);
   const options: IRequestOptions = {
     allowRetries: false,
     socketTimeout: 5000,
