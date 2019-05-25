@@ -3,7 +3,7 @@
 Monitoring target endpoint health every 5 minutes.
 
 Send notification via slack webhook, if target state changed.
- 
+
 ## setup
 
 Install dependencies using yarn (or npm).
@@ -15,9 +15,10 @@ $ yarn install
 Create `config.yml`.
 
 ```yaml
-aws_profile: # aws profile
-target_endpoint: # target endpoint
-slack_webhook_url: # see https://api.slack.com/incoming-webhooks
+aws_profile:       # aws profile
+target_endpoint:   # target endpoint
+slack_webhook_url: # https://api.slack.com/incoming-webhooks
+dynamo_db_table:   # dynamodb table name
 ```
 
 Deploy Lambda function using [serverless](https://serverless.com/).
