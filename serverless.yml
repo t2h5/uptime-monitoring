@@ -9,6 +9,12 @@ provider:
   memorySize: 128
   timeout: 8
   logRetentionInDays: 30
+  iamRoleStatements:
+    - Effect: Allow
+      Resource:
+        Fn::GetAtt: [DDBTable, Arn]
+      Action:
+        - dynamodb:*
 
 custom:
   config: ${file(./config.yml)}
@@ -22,5 +28,22 @@ functions:
     environment:
       targetEndpoint: ${self:custom.config.target_endpoint}
       slackWebhookUrl: ${self:custom.config.slack_webhook_url}
+      dynamoDBTable: ${self:custom.config.dynamo_db_table}-${opt:stage, 'dev'}
     events:
       - schedule: rate(5 minutes)
+
+resources:
+  Resources:
+    DDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.config.dynamo_db_table}-${opt:stage, 'dev'}
+        AttributeDefinitions:
+          - AttributeName: key
+            AttributeType: S
+        KeySchema:
+          - AttributeName: key
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

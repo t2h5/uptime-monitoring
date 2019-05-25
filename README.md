@@ -2,8 +2,8 @@
 
 Monitoring target endpoint health every 5 minutes.
 
-Send notification via slack webhook, if target isn't healthy.
-
+Send notification via slack webhook, if target state changed.
+ 
 ## setup
 
 Install dependencies using yarn (or npm).
@@ -20,8 +20,9 @@ target_endpoint: # target endpoint
 slack_webhook_url: # see https://api.slack.com/incoming-webhooks
 ```
 
-Deploy Lambda function via [serverless](https://serverless.com/).
+Deploy Lambda function using [serverless](https://serverless.com/).
 
 ```sh
 $ yarn deploy
+# resouces will be created
 ```

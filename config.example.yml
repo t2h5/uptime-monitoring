@@ -1,3 +1,4 @@
 aws_profile:
 target_endpoint:
 slack_webhook_url:
+dynamo_db_table:

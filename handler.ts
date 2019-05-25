@@ -6,15 +6,32 @@ import {
   IRequestHandler,
   IRequestOptions,
 } from 'typed-rest-client/Interfaces';
+import { getState, setState } from './dynamo';
 
 const targetEndpoint = process.env.targetEndpoint;
 const slackWebhookUrl = process.env.slackWebhookUrl;
 
+let state: string;
+let prevState: string;
+
+const colors: { [key: string]: string } = {
+  error: 'warning',
+  healthy: 'good',
+  unhealthy: 'danger',
+};
+
 export const main: ScheduledHandler = async (
-  event: ScheduledEvent,
-  _: Context,
+  _event: ScheduledEvent,
+  _context: Context,
 ) => {
-  console.log(event);
+  await getState()
+    .then(value => {
+      prevState = value;
+    })
+    .catch(err => {
+      console.log(err);
+      prevState = 'unknown';
+    });
   const options: IRequestOptions = {
     allowRetries: false,
     socketTimeout: 5000,
@@ -24,28 +41,33 @@ export const main: ScheduledHandler = async (
     [] as IRequestHandler[],
     options,
   );
-  let res: httpm.HttpClientResponse;
-  try {
-    res = await http.get(targetEndpoint);
-    const status = res.message.statusCode;
-    if (status === 200) {
-      console.log('target is healthy');
-    } else {
-      console.log(`target is not healthy: ${status}`);
-      const message: string = JSON.stringify({
-        attachments: [
-          {
-            color: 'danger',
-            text: `<!here> health check failed (status: ${status})`,
-            title: 'uptime-monitoring',
-          },
-        ],
-      });
-      await http.post(slackWebhookUrl, message, {
-        'Content-type': 'application/json',
-      } as IHeaders);
-    }
-  } catch (err) {
-    console.error('Failed: ' + err.message);
+  await http
+    .get(targetEndpoint)
+    .then(resp => {
+      if (resp.message.statusCode === 200) {
+        state = 'healthy';
+      } else {
+        state = 'unhealthy';
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      state = 'error';
+    });
+  await setState(state);
+  if (state !== prevState) {
+    console.log(`state changed: ${prevState} to ${state}`);
+    const message: string = JSON.stringify({
+      attachments: [
+        {
+          color: colors[state],
+          text: `<!here> health check state changed: ${prevState} to ${state}`,
+          title: 'uptime-monitoring',
+        },
+      ],
+    });
+    await http.post(slackWebhookUrl, message, {
+      'Content-type': 'application/json',
+    } as IHeaders);
   }
 };
