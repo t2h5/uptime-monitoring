@@ -16,11 +16,15 @@ provider:
       Action:
         - dynamodb:*
 
+plugins:
+  - serverless-prune-plugin
+  - serverless-webpack
+
 custom:
   config: ${file(./config.yml)}
-
-plugins:
-  - serverless-webpack
+  prune:
+    automatic: true
+    number: 5
 
 functions:
   main:
