@@ -66,8 +66,14 @@ export const main: ScheduledHandler = async (
         },
       ],
     });
-    await http.post(slackWebhookUrl, message, {
-      'Content-type': 'application/json',
-    } as IHeaders);
+    await http
+      .post(slackWebhookUrl, message, {
+        'Content-type': 'application/json',
+      } as IHeaders)
+      .catch(err => {
+        console.log(err);
+      });
+  } else {
+    console.log(`state stayed ${state}`);
   }
 };
