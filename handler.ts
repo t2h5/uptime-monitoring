@@ -1,11 +1,6 @@
 import { Context, ScheduledEvent, ScheduledHandler } from 'aws-lambda'
+import axios, { AxiosRequestConfig } from 'axios'
 import 'source-map-support/register'
-import * as httpm from 'typed-rest-client/HttpClient'
-import {
-  IHeaders,
-  IRequestHandler,
-  IRequestOptions,
-} from 'typed-rest-client/Interfaces'
 import { getState, setState } from './dynamo'
 
 const targetEndpoint = process.env.targetEndpoint
@@ -32,19 +27,17 @@ export const main: ScheduledHandler = async (
       console.log(err)
       prevState = 'unknown'
     })
-  const options: IRequestOptions = {
-    allowRetries: false,
-    socketTimeout: 5000,
-  } as IRequestOptions
-  const http: httpm.HttpClient = new httpm.HttpClient(
-    'uptime-monitoring',
-    [] as IRequestHandler[],
-    options,
-  )
-  await http
-    .get(targetEndpoint)
-    .then(resp => {
-      if (resp.message.statusCode === 200) {
+  const targetConfig: AxiosRequestConfig = {
+    headers: { 'User-Agent': 'uptime-monitoring' },
+    timeout: 5000,
+    validateStatus: _status => {
+      return true
+    },
+  }
+  await axios
+    .get(targetEndpoint, targetConfig)
+    .then(res => {
+      if (res.status === 200) {
         state = 'healthy'
       } else {
         state = 'unhealthy'
@@ -66,13 +59,13 @@ export const main: ScheduledHandler = async (
         },
       ],
     })
-    await http
-      .post(slackWebhookUrl, message, {
-        'Content-type': 'application/json',
-      } as IHeaders)
-      .catch(err => {
-        console.log(err)
-      })
+    const slackConfig: AxiosRequestConfig = {
+      headers: { 'Content-type': 'application/json' },
+      timeout: 2000,
+    }
+    await axios.post(slackWebhookUrl, message, slackConfig).catch(err => {
+      console.log(err)
+    })
   } else {
     console.log(`state stayed ${state}`)
   }
