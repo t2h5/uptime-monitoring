@@ -1,15 +1,14 @@
 {
   "name": "uptime-monitoring",
-  "main": "handler.js",
   "scripts": {
     "lint": "tslint *.ts",
     "deploy": "sls deploy -v",
-    "tail-logs": "sls logs -f main -t --startTime 30m"
+    "logs": "sls logs -f main -t"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb-v2-node": "^0.1.0-preview.2",
-    "source-map-support": "^0.5.10",
-    "typed-rest-client": "^1.4.0"
+    "axios": "^0.19.0",
+    "source-map-support": "^0.5.10"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
