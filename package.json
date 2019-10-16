@@ -2,9 +2,9 @@
   "name": "uptime-monitoring",
   "scripts": {
     "lint": "tslint *.ts",
-    "prettier": "prettier",
-    "deploy": "sls deploy -v",
-    "logs": "sls logs -f main -t"
+    "invoke": "sls invoke -f main --log",
+    "logs": "sls logs -f main -t",
+    "deploy": "sls deploy -v"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb-v2-node": "^0.1.0-preview.2",
