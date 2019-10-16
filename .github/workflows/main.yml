@@ -1,4 +1,4 @@
-name: Action
+name: Actions
 
 on: [push]
 
