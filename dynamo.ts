@@ -27,7 +27,7 @@ export async function getState(): Promise<string> {
       }
     })
     .catch(err => {
-      throw err;
+      throw err
     })
 }
 
