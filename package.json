@@ -7,6 +7,7 @@
     "lint": "tslint *.ts",
     "invoke": "sls invoke -f main --log",
     "logs": "sls logs -f main -t",
+    "build": "sls webpack",
     "deploy": "sls deploy -v"
   },
   "dependencies": {

@@ -22,6 +22,8 @@ plugins:
 
 custom:
   config: ${file(./config.yml)}
+  webpack:
+    packager: 'yarn'
   prune:
     automatic: true
     number: 5
