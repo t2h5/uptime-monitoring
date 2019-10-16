@@ -1,6 +1,6 @@
 # uptime-monitoring
 
-[![Actions Status](https://github.com/t2h5/uptime-monitoring/workflows/Github%20Actions/badge.svg)](https://github.com/t2h5/uptime-monitoring/actions)
+[![Actions Status](https://github.com/t2h5/uptime-monitoring/workflows/GitHub%20Actions/badge.svg)](https://github.com/t2h5/uptime-monitoring/actions)
 
 Monitoring target endpoint health every 5 minutes.
 
