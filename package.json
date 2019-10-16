@@ -1,5 +1,8 @@
 {
   "name": "uptime-monitoring",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "lint": "tslint *.ts",
     "invoke": "sls invoke -f main --log",
