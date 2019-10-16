@@ -2,6 +2,7 @@
   "name": "uptime-monitoring",
   "scripts": {
     "lint": "tslint *.ts",
+    "prettier": "prettier",
     "deploy": "sls deploy -v",
     "logs": "sls logs -f main -t"
   },
