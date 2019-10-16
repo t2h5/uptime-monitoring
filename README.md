@@ -1,5 +1,7 @@
 # uptime-monitoring
 
+[![Actions Status](https://github.com/t2h5/uptime-monitoring/workflows/main/badge.svg?branch=master)](https://github.com/t2h5/uptime-monitoring/actions)
+
 Monitoring target endpoint health every 5 minutes.
 
 Send notification via slack webhook, if target state changed.
