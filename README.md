@@ -6,10 +6,13 @@ Monitoring target endpoint health every 5 minutes.
 
 Send notification via slack webhook, **only** if target state changed.
 
+NOTE: DO NOT make too much access to any endpoint you don't own!
+
 ## requirements
 
 - Node.js 10.x
 - yarn
+- aws profile
 
 ## setup
 

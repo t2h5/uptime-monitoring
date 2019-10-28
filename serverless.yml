@@ -14,7 +14,8 @@ provider:
       Resource:
         Fn::GetAtt: [DDBTable, Arn]
       Action:
-        - dynamodb:*
+        - dynamodb:GetItem
+        - dynamodb:PutItem
 
 plugins:
   - serverless-prune-plugin
