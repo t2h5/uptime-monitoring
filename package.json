@@ -1,7 +1,7 @@
 {
   "name": "uptime-monitoring",
   "engines": {
-    "node": "10.x || 12.x"
+    "node": "12.x"
   },
   "scripts": {
     "lint": "tslint *.ts",
