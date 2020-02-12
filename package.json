@@ -4,7 +4,7 @@
     "node": "12.x"
   },
   "scripts": {
-    "lint": "tslint *.ts",
+    "lint": "eslint . --ext .ts",
     "invoke": "sls invoke -f main --log",
     "logs": "sls logs -f main -t",
     "build": "sls webpack",
@@ -18,14 +18,16 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.40",
     "@types/node": "^13.7.0",
-    "prettier": "^1.18.2",
+    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/parser": "^2.19.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
     "serverless": "^1.62.0",
     "serverless-prune-plugin": "^1.3.2",
     "serverless-webpack": "^5.3.1",
     "ts-loader": "^6.2.0",
-    "tslint": "^5.20.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
