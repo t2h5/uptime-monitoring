@@ -20,30 +20,30 @@ export const main: ScheduledHandler = async (
   _context: Context,
 ) => {
   await getState()
-    .then(value => {
+    .then((value) => {
       prevState = value
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err)
       prevState = 'unknown'
     })
   const targetConfig: AxiosRequestConfig = {
     headers: { 'User-Agent': 'uptime-monitoring' },
     timeout: 5000,
-    validateStatus: _status => {
+    validateStatus: (_status) => {
       return true
     },
   }
   await axios
     .get(targetEndpoint, targetConfig)
-    .then(res => {
+    .then((res) => {
       if (res.status === 200) {
         state = 'healthy'
       } else {
         state = 'unhealthy'
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err)
       state = 'error'
     })
@@ -63,7 +63,7 @@ export const main: ScheduledHandler = async (
       headers: { 'Content-type': 'application/json' },
       timeout: 2000,
     }
-    await axios.post(slackWebhookUrl, message, slackConfig).catch(err => {
+    await axios.post(slackWebhookUrl, message, slackConfig).catch((err) => {
       console.log(err)
     })
   } else {
