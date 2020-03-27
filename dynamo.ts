@@ -19,14 +19,14 @@ export async function getState(): Promise<string> {
   const getItemCommand = new GetItemCommand(params)
   return await dynamoDB
     .send(getItemCommand)
-    .then(res => {
+    .then((res) => {
       if (res.Item !== undefined) {
         return res.Item.value.S
       } else {
         return 'not found'
       }
     })
-    .catch(err => {
+    .catch((err) => {
       throw err
     })
 }
@@ -41,7 +41,7 @@ export async function setState(state: string) {
     TableName: dynamoDBTable,
   }
   const putItemCommand = new PutItemCommand(params)
-  await dynamoDB.send(putItemCommand).catch(err => {
+  await dynamoDB.send(putItemCommand).catch((err) => {
     console.log(err)
   })
 }
