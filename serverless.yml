@@ -9,6 +9,8 @@ provider:
   memorySize: 128
   timeout: 8
   logRetentionInDays: 30
+  environment:
+    VERSION: ${self:custom.package.version}
   iamRoleStatements:
     - Effect: Allow
       Resource:
@@ -22,6 +24,7 @@ plugins:
   - serverless-webpack
 
 custom:
+  package: ${file(./package.json)}
   config: ${file(./config.yml)}
   webpack:
     packager: 'yarn'
