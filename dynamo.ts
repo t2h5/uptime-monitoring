@@ -1,10 +1,10 @@
 import {
   DynamoDBClient,
   GetItemInput,
+  GetItemCommand,
   PutItemInput,
-} from '@aws-sdk/client-dynamodb-v2-node'
-import { GetItemCommand } from '@aws-sdk/client-dynamodb-v2-node/commands/GetItemCommand'
-import { PutItemCommand } from '@aws-sdk/client-dynamodb-v2-node/commands/PutItemCommand'
+  PutItemCommand,
+} from '@aws-sdk/client-dynamodb'
 
 const dynamoDB = new DynamoDBClient({})
 const dynamoDBTable = process.env.dynamoDBTable
