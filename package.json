@@ -1,13 +1,14 @@
 {
   "name": "uptime-monitoring",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "node": "12.x"
   },
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "invoke": "sls invoke -f main --log",
-    "logs": "sls logs -f main -t",
+    "sls:info": "sls info -v",
+    "sls:logs": "sls logs -f main -t",
+    "sls:invoke": "sls invoke -f main --log",
     "build": "sls webpack",
     "deploy": "sls deploy -v"
   },
