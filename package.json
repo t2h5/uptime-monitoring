@@ -1,38 +1,37 @@
 {
   "name": "uptime-monitoring",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "engines": {
     "node": "12.x"
   },
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "sls:info": "sls info -v",
-    "sls:logs": "sls logs -f main -t",
-    "sls:invoke": "sls invoke -f main --log",
+    "invoke": "sls invoke -f main --log",
+    "logs": "sls logs -f main -t",
     "build": "sls webpack",
     "deploy": "sls deploy -v"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^1.0.0-rc.3",
-    "axios": "^0.21.0",
+    "@aws-sdk/client-dynamodb-v2-node": "^0.1.0-preview.2",
+    "axios": "^0.19.2",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.61",
     "@types/node": "^14.6.0",
-    "@typescript-eslint/eslint-plugin": "^4.6.0",
-    "@typescript-eslint/parser": "^4.6.0",
+    "@typescript-eslint/eslint-plugin": "^3.9.1",
+    "@typescript-eslint/parser": "^3.9.1",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.0.5",
-    "serverless": "^2.9.0",
+    "serverless": "^1.79.0",
     "serverless-prune-plugin": "^1.4.3",
     "serverless-webpack": "^5.3.3",
     "ts-loader": "^8.0.2",
     "typescript": "^4.0.2",
-    "webpack": "^5.3.2",
-    "webpack-cli": "^4.1.0"
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
   "author": "tatsuya",
   "license": "MIT"

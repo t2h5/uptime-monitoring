@@ -1,10 +1,10 @@
 import {
   DynamoDBClient,
   GetItemInput,
-  GetItemCommand,
   PutItemInput,
-  PutItemCommand,
-} from '@aws-sdk/client-dynamodb'
+} from '@aws-sdk/client-dynamodb-v2-node'
+import { GetItemCommand } from '@aws-sdk/client-dynamodb-v2-node/commands/GetItemCommand'
+import { PutItemCommand } from '@aws-sdk/client-dynamodb-v2-node/commands/PutItemCommand'
 
 const dynamoDB = new DynamoDBClient({})
 const dynamoDBTable = process.env.dynamoDBTable
@@ -31,7 +31,7 @@ export async function getState(): Promise<string> {
     })
 }
 
-export async function setState(state: string): Promise<void> {
+export async function setState(state: string) {
   const params: PutItemInput = {
     Item: {
       key: { S: 'state' },
@@ -41,12 +41,7 @@ export async function setState(state: string): Promise<void> {
     TableName: dynamoDBTable,
   }
   const putItemCommand = new PutItemCommand(params)
-  return await dynamoDB
-    .send(putItemCommand)
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  await dynamoDB.send(putItemCommand).catch((err) => {
+    console.log(err)
+  })
 }
