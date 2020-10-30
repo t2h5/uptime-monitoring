@@ -31,7 +31,7 @@ export async function getState(): Promise<string> {
     })
 }
 
-export async function setState(state: string) {
+export async function setState(state: string): Promise<void> {
   const params: PutItemInput = {
     Item: {
       key: { S: 'state' },
@@ -41,7 +41,12 @@ export async function setState(state: string) {
     TableName: dynamoDBTable,
   }
   const putItemCommand = new PutItemCommand(params)
-  await dynamoDB.send(putItemCommand).catch((err) => {
-    console.log(err)
-  })
+  return await dynamoDB
+    .send(putItemCommand)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
