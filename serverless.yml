@@ -2,6 +2,7 @@ service: uptime-monitoring
 
 provider:
   name: aws
+  lambdaHashingVersion: 20201221
   runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'ap-northeast-1'}
@@ -11,13 +12,15 @@ provider:
   logRetentionInDays: 30
   environment:
     VERSION: ${self:custom.package.version}
-  iamRoleStatements:
-    - Effect: Allow
-      Resource:
-        Fn::GetAtt: [DDBTable, Arn]
-      Action:
-        - dynamodb:GetItem
-        - dynamodb:PutItem
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Resource:
+            Fn::GetAtt: [DDBTable, Arn]
+          Action:
+            - dynamodb:GetItem
+            - dynamodb:PutItem
 
 plugins:
   - serverless-prune-plugin
