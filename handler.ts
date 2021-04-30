@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import 'source-map-support/register';
 import { getState, setState } from './dynamo';
 
+const VERSION = process.env.VERSION;
 const targetEndpoint = process.env.targetEndpoint;
 const slackWebhookUrl = process.env.slackWebhookUrl;
 
@@ -19,6 +20,7 @@ export const main: ScheduledHandler = async (
   _event: ScheduledEvent,
   _context: Context,
 ) => {
+  console.log(`uptime-monitoring v${VERSION}`);
   await getState()
     .then((value) => {
       prevState = value;
