@@ -1,12 +1,12 @@
 import {
-  DynamoDBClient,
+  DynamoDB,
   GetItemCommand,
   GetItemCommandInput,
   PutItemCommand,
   PutItemCommandInput,
 } from '@aws-sdk/client-dynamodb';
 
-const dynamoDB = new DynamoDBClient({});
+const dynamoDB = new DynamoDB({});
 const dynamoDBTable = process.env.dynamoDBTable;
 
 export async function getState(): Promise<string> {
