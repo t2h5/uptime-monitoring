@@ -9,7 +9,7 @@ provider:
   profile: ${self:custom.config.aws_profile}
   memorySize: 128
   timeout: 10
-  logRetentionInDays: 30
+  logRetentionInDays: 14
   environment:
     VERSION: ${self:custom.package.version}
   iam:
