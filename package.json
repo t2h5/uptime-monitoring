@@ -9,7 +9,7 @@
     "invoke": "sls invoke -f main --log",
     "logs": "sls logs -f main -t",
     "build": "sls webpack",
-    "deploy": "sls deploy -v"
+    "deploy": "sls deploy --verbose"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.26.0",
