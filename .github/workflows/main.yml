@@ -14,6 +14,15 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
+    - name: cache node_modules
+      id: node_modules_cache_id
+      uses: actions/cache@v2
+      with:
+        path: |
+          node_modules
+          packages/*/node_modules
+          distributions/*/node_modules
+        key: node-v${{ matrix.node-version }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
     - name: yarn install, lint, build
       run: |
         yarn install
