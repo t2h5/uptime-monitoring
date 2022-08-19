@@ -10,7 +10,7 @@ Send notification via slack webhook, **only** if target state changed.
 
 ## requirements
 
-- Node.js 14.x
+- Node.js 16.x
 - yarn
 - aws profile
 

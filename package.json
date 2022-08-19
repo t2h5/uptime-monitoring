@@ -1,8 +1,8 @@
 {
   "name": "uptime-monitoring",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "scripts": {
     "lint": "eslint . --ext .ts",
@@ -25,7 +25,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.3.2",
-    "serverless": "^2.57.0",
+    "serverless": "^3.22.0",
     "serverless-prune-plugin": "^2.0.1",
     "serverless-webpack": "^5.5.3",
     "ts-loader": "^9.2.5",
