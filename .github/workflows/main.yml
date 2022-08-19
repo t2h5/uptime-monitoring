@@ -25,6 +25,7 @@ jobs:
         key: node-v${{ matrix.node-version }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
     - name: yarn install, lint, build
       run: |
+        cp config.test.yml config.yml
         yarn install
         yarn lint
         yarn build

@@ -1,0 +1,4 @@
+aws_profile: default
+target_endpoint: target
+slack_webhook_url: url
+dynamo_db_table: table
