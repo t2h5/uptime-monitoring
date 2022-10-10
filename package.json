@@ -12,8 +12,8 @@
     "deploy": "sls deploy --verbose"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.29.0",
-    "axios": "^0.24.0",
+    "@aws-sdk/client-dynamodb": "^3.186.0",
+    "axios": "^1.1.2",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
