@@ -3,7 +3,7 @@ service: uptime-monitoring
 provider:
   name: aws
   lambdaHashingVersion: 20201221
-  runtime: nodejs16.x
+  runtime: nodejs20.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'ap-northeast-1'}
   profile: ${self:custom.config.aws_profile}
