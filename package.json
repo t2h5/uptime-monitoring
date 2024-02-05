@@ -2,7 +2,7 @@
   "name": "uptime-monitoring",
   "version": "0.3.8",
   "engines": {
-    "node": "16.x"
+    "node": "20.x"
   },
   "scripts": {
     "lint": "eslint . --ext .ts",
