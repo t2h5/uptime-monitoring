@@ -1,6 +1,6 @@
 {
   "name": "uptime-monitoring",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "engines": {
     "node": "20.x"
   },
