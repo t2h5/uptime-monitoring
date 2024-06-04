@@ -21,6 +21,7 @@ export const main: ScheduledHandler = async (
   _context: Context,
 ) => {
   console.log(`uptime-monitoring v${VERSION}`);
+
   await getState()
     .then((value) => {
       prevState = value;
@@ -29,6 +30,8 @@ export const main: ScheduledHandler = async (
       console.log(err);
       prevState = 'unknown';
     });
+  console.log(`prevState: ${prevState}`);
+
   const targetConfig: AxiosRequestConfig = {
     headers: { 'User-Agent': 'uptime-monitoring' },
     timeout: 5000,
@@ -49,7 +52,10 @@ export const main: ScheduledHandler = async (
       console.log(err);
       state = 'error';
     });
+
   await setState(state);
+  console.log(`state: ${state}`);
+
   if (state !== prevState) {
     console.log(`state changed: ${prevState} to ${state}`);
     const message: string = JSON.stringify({
