@@ -13,6 +13,7 @@ let prevState: string;
 const colors: { [key: string]: string } = {
   error: 'warning',
   healthy: 'good',
+  timeout: 'warning',
   unhealthy: 'danger',
 };
 
@@ -50,7 +51,11 @@ export const main: ScheduledHandler = async (
     })
     .catch((err) => {
       console.log(err);
-      state = 'error';
+      if (err.code === 'ECONNABORTED') {
+        state = 'timeout';
+      } else {
+        state = 'error';
+      }
     });
 
   await setState(state);
